@@ -1,240 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Create Account</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
 
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        background: #f3f3f3;
-        transition: 0.3s;
-    }
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
 
-    /* Dark Mode */
-    body.dark {
-        background: #1c1c1c;
-        color: white;
-    }
+        body{
+            background:#f4f4f4;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            min-height:100vh;
+            padding:20px;
+            transition:0.3s;
+        }
 
-    .container {
-        width: 92%;
-        max-width: 430px;
-        background: white;
-        padding: 25px;
-        border-radius: 12px;
-        box-shadow: 0 0 12px rgba(0,0,0,0.2);
-        transition: 0.3s;
-        box-sizing: border-box;
-    }
-    body.dark .container {
-        background: #2b2b2b;
-        color: white;
-    }
+        .container{
+            width:100%;
+            max-width:420px;
+            background:#fff;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0 0 10px rgba(0,0,0,0.2);
+        }
 
-    h2 {
-        text-align: center;
-        margin-top: 0;
-    }
+        h2{
+            text-align:center;
+            margin-bottom:20px;
+        }
 
-    /* Floating labels */
-    .input-group {
-        position: relative;
-        margin-bottom: 22px;
-    }
+        /* Floating Labels */
+        .input-box{
+            position:relative;
+            margin-bottom:18px;
+        }
+        .input-box input{
+            width:100%;
+            padding:12px;
+            font-size:16px;
+            outline:none;
+            border:1px solid #aaa;
+            border-radius:6px;
+            background:transparent;
+        }
+        .input-box label{
+            position:absolute;
+            left:12px;
+            top:12px;
+            color:#777;
+            transition:0.2s;
+            pointer-events:none;
+            background:white;
+            padding:0 4px;
+        }
+        .input-box input:focus + label,
+        .input-box input:not(:placeholder-shown) + label{
+            top:-8px;
+            font-size:13px;
+            color:#333;
+        }
 
-    .input-group input {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid gray;
-        border-radius: 6px;
-        font-size: 16px;
-        outline: none;
-        background: transparent;
-    }
+        /* Gender Select */
+        .gender-box{
+            margin-bottom:15px;
+        }
+        .gender-box h4{
+            margin-bottom:6px;
+        }
+        .gender{
+            display:flex;
+            justify-content:space-between;
+        }
+        .gender div{
+            width:30%;
+            padding:10px;
+            text-align:center;
+            border:1px solid #aaa;
+            border-radius:6px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+        .gender div.active{
+            background:#007bff;
+            color:white;
+        }
 
-    .input-group label {
-        position: absolute;
-        left: 12px;
-        top: 12px;
-        font-size: 15px;
-        color: gray;
-        transition: 0.2s;
-        pointer-events: none;
-    }
+        /* Password Strength Bar */
+        #strengthBar{
+            width:100%;
+            height:6px;
+            background:#ddd;
+            border-radius:5px;
+            margin-top:5px;
+        }
+        #strength{
+            height:100%;
+            width:0%;
+            background:green;
+            border-radius:5px;
+        }
 
-    .input-group input:focus + label,
-    .input-group input:not(:placeholder-shown) + label {
-        top: -8px;
-        left: 10px;
-        background: inherit;
-        font-size: 12px;
-        padding: 0 4px;
-        color: #2196F3;
-    }
+        /* Submit Button + Loader */
+        .btn{
+            width:100%;
+            padding:12px;
+            background:#007bff;
+            color:white;
+            border:none;
+            border-radius:6px;
+            font-size:18px;
+            cursor:pointer;
+            margin-top:10px;
+        }
+        .loader{
+            display:none;
+            margin:auto;
+            margin-top:15px;
+            border:4px solid #eee;
+            border-top:4px solid #007bff;
+            width:32px;
+            height:32px;
+            border-radius:50%;
+            animation:spin 1s linear infinite;
+        }
+        @keyframes spin{
+            100%{transform:rotate(360deg);}
+        }
 
-    /* Gender Buttons */
-    h4 {
-        margin-bottom: 10px;
-        margin-top: 10px;
-    }
-
-    .gender-box {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-        gap: 10px;
-    }
-
-    .gender-box div {
-        flex: 1;
-        padding: 10px;
-        border: 2px solid gray;
-        border-radius: 8px;
-        text-align: center;
-        cursor: pointer;
-        transition: 0.3s;
-        user-select: none;
-    }
-    .gender-box div:hover {
-        border-color: #2196F3;
-    }
-    .gender-box .selected {
-        border-color: #2196F3;
-        background: #e9f3ff;
-    }
-
-    /* Password Strength */
-    #strength {
-        margin-top: -14px;
-        margin-bottom: 10px;
-        font-size: 14px;
-    }
-
-    /* Submit Button */
-    button {
-        width: 100%;
-        padding: 12px;
-        background: #2196F3;
-        border: none;
-        color: white;
-        border-radius: 8px;
-        font-size: 18px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-    button:hover {
-        background: #0b7dda;
-    }
-
-    /* Loader */
-    .loader {
-        display: none;
-        border: 4px solid #ddd;
-        border-top: 4px solid #2196F3;
-        border-radius: 50%;
-        width: 34px;
-        height: 34px;
-        animation: spin 0.8s linear infinite;
-        margin: 10px auto;
-    }
-    @keyframes spin {
-        100% { transform: rotate(360deg); }
-    }
-
-    /* Dark/Light toggle */
-    .toggle-btn {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        padding: 7px 14px;
-        background: black;
-        color: white;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 14px;
-    }
-</style>
-
+        /* Dark Mode */
+        body.dark{
+            background:#1a1a1a;
+            color:white;
+        }
+        body.dark .container{
+            background:#2a2a2a;
+            color:white;
+        }
+        body.dark input{
+            background:#222;
+            color:white;
+            border:1px solid #666;
+        }
+        #toggle{
+            position:absolute;
+            top:15px;
+            right:15px;
+            padding:6px 12px;
+            background:black;
+            color:white;
+            border-radius:20px;
+            cursor:pointer;
+            font-size:14px;
+        }
+    </style>
 </head>
+
 <body>
 
-<div class="toggle-btn" onclick="toggleMode()">Dark/Light</div>
+<div id="toggle">Dark Mode</div>
 
 <div class="container">
-    <h2>Create New Account</h2>
+    <h2>Create Your Account</h2>
 
-    <!-- Name -->
-    <div class="input-group">
-        <input type="text" id="name" required placeholder=" ">
+    <div class="input-box">
+        <input type="text" id="name" placeholder=" " required>
         <label>Full Name</label>
     </div>
 
-    <!-- Email -->
-    <div class="input-group">
-        <input type="email" id="email" required placeholder=" ">
-        <label>Email</label>
+    <div class="input-box">
+        <input type="email" id="email" placeholder=" " required>
+        <label>Email Address</label>
     </div>
 
-    <!-- Password -->
-    <div class="input-group">
-        <input type="password" id="password" required placeholder=" " onkeyup="checkStrength()">
+    <div class="input-box">
+        <input type="password" id="password" placeholder=" " required onkeyup="checkStrength()">
         <label>Password</label>
+
+        <div id="strengthBar">
+            <div id="strength"></div>
+        </div>
     </div>
 
-    <div id="strength"></div>
-
-    <!-- Gender -->
-    <h4>Select Gender</h4>
+    <!-- Gender Selector -->
     <div class="gender-box">
-        <div onclick="selectGender(this,'Male')">♂ Male</div>
-        <div onclick="selectGender(this,'Female')">♀ Female</div>
-        <div onclick="selectGender(this,'Other')">⚧ Other</div>
+        <h4>Select Gender</h4>
+        <div class="gender">
+            <div onclick="selectGender(this)">Male</div>
+            <div onclick="selectGender(this)">Female</div>
+            <div onclick="selectGender(this)">Other</div>
+        </div>
     </div>
 
-    <button onclick="submitForm()">Create Account</button>
-    <div class="loader" id="loader"></div>
+    <!-- Submit -->
+    <button class="btn" onclick="submitForm()">Create Account</button>
+    <div class="loader" id="load"></div>
 </div>
 
-
 <script>
-    let gender = "";
-
-    function selectGender(box, value) {
-        document.querySelectorAll(".gender-box div").forEach(b => b.classList.remove("selected"));
-        box.classList.add("selected");
-        gender = value;
+    // Gender Selection
+    function selectGender(el){
+        document.querySelectorAll(".gender div").forEach(g=>g.classList.remove("active"));
+        el.classList.add("active");
     }
 
     // Password Strength Checker
-    function checkStrength() {
+    function checkStrength(){
         let pass = document.getElementById("password").value;
         let strength = document.getElementById("strength");
 
-        if (pass.length < 4) strength.innerHTML = "Weak Password ❌";
-        else if (pass.length < 7) strength.innerHTML = "Medium Password ⚠️";
-        else strength.innerHTML = "Strong Password ✅";
+        let score = 0;
+        if(pass.length > 5) score++;
+        if(/[A-Z]/.test(pass)) score++;
+        if(/[0-9]/.test(pass)) score++;
+        if(/[^A-Za-z0-9]/.test(pass)) score++;
+
+        let width = ["20%","40%","60%","100%"][score-1] || "10%";
+        strength.style.width = width;
+        strength.style.background = score < 2 ? "red" : score < 3 ? "orange" : "green";
     }
 
-    // Submit with Loader + Success Page
-    function submitForm() {
-        document.getElementById("loader").style.display = "block";
-
-        setTimeout(() => {
-            window.location.href = "success.html";
-        }, 2000);
-    }
-
-    // Dark / Light Mode
-    function toggleMode() {
+    // Dark Mode Toggle
+    document.getElementById("toggle").onclick = function(){
         document.body.classList.toggle("dark");
+        this.innerText = document.body.classList.contains("dark") ? "Light Mode" : "Dark Mode";
+    }
+
+    // Form Submit + Loader + Success Page
+    function submitForm(){
+        document.getElementById("load").style.display = "block";
+
+        setTimeout(()=>{
+            document.body.innerHTML = `
+                <h1 style="text-align:center;margin-top:40px;">🎉 Welcome to Your Account!</h1>
+                <p style="text-align:center;font-size:18px;">Your account has been created successfully.</p>
+            `;
+        },2000);
     }
 </script>
 
