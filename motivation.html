@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motivation Zone ✨</title>
+
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg,#000428,#004e92);
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Animated floating lights */
+        .light{
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, #00eaff99, transparent);
+            border-radius: 50%;
+            animation: float 6s infinite alternate ease-in-out;
+            opacity: 0.4;
+        }
+
+        .light:nth-child(1){ top: 10%; left: 15%; animation-delay: 0s; }
+        .light:nth-child(2){ bottom: 20%; right: 20%; animation-delay: 1s; }
+        .light:nth-child(3){ top: 50%; right: 10%; animation-delay: 2s; }
+
+        @keyframes float{
+            0%{ transform: translateY(0px) scale(1); }
+            100%{ transform: translateY(-50px) scale(1.2); }
+        }
+
+        /* Main neon quote box */
+        #quoteBox{
+            color: #00eaff;
+            font-size: 2.2rem;
+            text-align: center;
+            width: 80%;
+            max-width: 800px;
+            text-shadow: 0 0 10px #00eaff, 0 0 25px #00f2ff;
+            animation: zoomfade 3s infinite alternate ease-in-out;
+        }
+
+        /* 3D Zoom animation */
+        @keyframes zoomfade{
+            0%{ transform: scale(1); opacity: 0.9; }
+            100%{ transform: scale(1.08); opacity: 1; }
+        }
+
+        /* Typewriter effect */
+        .typewriter{
+            border-right: 3px solid #00eaff;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3s steps(40) infinite;
+        }
+
+        @keyframes typing{
+            0%{ width: 0%; }
+            100%{ width: 100%; }
+        }
+
+        /* Button */
+        button{
+            margin-top: 40px;
+            padding: 12px 25px;
+            background: white;
+            color: #004e92;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- animated lights -->
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+
+    <!-- Neon Quote -->
+    <div id="quoteBox" class="typewriter"></div>
+
+    <script>
+        const quotes = [
+            "“सपने वो नहीं जो हम सोते वक्त देखते हैं, सपने वो हैं जो हमें सोने नहीं देते।”",
+            "“कभी हार मत मानो, बड़ी से बड़ी मंज़िल भी एक छोटे कदम से शुरू होती है।”",
+            "“जिंदगी में वही लोग सफल होते हैं, जो खतरे उठाने का साहस रखते हैं।”",
+            "“अगर आप उड़ नहीं सकते, तो दौड़ो। दौड़ नहीं सकते, तो चलो। लेकिन कोशिश करना मत छोड़ो।”",
+            "“सही समय का इंतज़ार मत करो—समय को सही बना दो।”"
+        ];
+
+        let index = 0;
+
+        function showQuote(){
+            const quoteBox = document.getElementById("quoteBox");
+            quoteBox.classList.remove("typewriter");
+            void quoteBox.offsetWidth; // restart animation trick
+            quoteBox.classList.add("typewriter");
+            quoteBox.innerHTML = quotes[index];
+            index = (index + 1) % quotes.length;
+        }
+
+        setInterval(showQuote, 3500);
+        showQuote();
+    </script>
+
+    <body>
+
+<a href="index.html" style="
+    display:inline-block;
+    padding:10px 20px;
+    background:#004e92;
+    color:white;
+    border-radius:10px;
+    text-decoration:none;
+    font-size:1.1rem;
+    font-weight:bold;
+    position:absolute;
+    top:20px;
+    left:20px;
+    box-shadow:0 0 10px #00000055;">
+    ⬅ Back
+</a>
+
+</body>
+</html>

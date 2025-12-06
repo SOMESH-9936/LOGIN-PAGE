@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Account</title>
+
+    <style>
+        body{
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff6a88, #ff99ac, #a8edea);
+            background-size: 400% 400%;
+            animation: bgMove 12s infinite alternate ease-in-out;
+            min-height: 100vh;
+            padding-top: 40px;
+            color: white;
+        }
+
+        @keyframes bgMove{
+            0%{ background-position: left; }
+            100%{ background-position: right; }
+        }
+
+        h1{
+            font-size: 2.6rem;
+            text-shadow: 0 0 15px #ffffffaa;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow{
+            0%{ text-shadow: 0 0 10px #fff; }
+            100%{ text-shadow: 0 0 25px #ffe3ed, 0 0 40px #ff6a88; }
+        }
+
+        img{
+            margin-top: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 25px #ffffff99, 0 0 50px #ff99acaa;
+            transform: scale(1);
+            animation: pop 3s infinite ease-in-out;
+        }
+
+        @keyframes pop{
+            0%{ transform: scale(1); }
+            100%{ transform: scale(1.05); }
+        }
+
+        p{
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px #00000050;
+        }
+
+        .love-line{
+            font-size: 1.5rem;
+            margin-top: 15px;
+            color: #ffe9f3;
+            text-shadow: 0 0 20px #ff6a88aa;
+            animation: loveGlow 2s infinite alternate;
+        }
+
+        @keyframes loveGlow{
+            0%{ opacity: .8; }
+            100%{ opacity: 1; }
+        }
+
+        button{
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #ff4b5c, #ff7676);
+            color: white;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 0 0 20px #ff4b5c99;
+            transition: 0.3s;
+        }
+
+        button:hover{
+            transform: scale(1.1);
+            box-shadow: 0 0 30px #fff;
+        }
+
+        /* Floating Heart Animation */
+        .heart{
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: pink;
+            transform: rotate(45deg);
+            animation: floatHearts 6s infinite ease-in-out;
+            opacity: 0.7;
+        }
+
+        .heart:before,
+        .heart:after{
+            content:"";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background:pink;
+            border-radius: 50%;
+        }
+
+        .heart:before{ top:-10px; }
+        .heart:after{ left:-10px; }
+
+        @keyframes floatHearts{
+            0%{ transform: translateY(0) rotate(45deg); opacity: 0.8; }
+            100%{ transform: translateY(-200px) rotate(45deg); opacity: 0; }
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- Floating hearts -->
+    <div class="heart" style="left:10%; animation-delay:0s;"></div>
+    <div class="heart" style="left:40%; animation-delay:2s;"></div>
+    <div class="heart" style="left:70%; animation-delay:4s;"></div>
+
+    <h1>Welcome to Your Account ❤️</h1>
+
+    <img src="img/WhatsApp Image 2025-12-06 at 11.48.56 AM.jpeg" width="300" alt="Login">
+
+    <h2>Beautiful Love Lines For a Beautiful Person 💕</h2>
+
+    <p>Thank You For Logging In 😘</p>
+
+    <p class="love-line">❤️ "Tum ho toh har subah khoobsurat lagti hai..."</p>
+
+    <a href="index.html">
+        <button>Back</button>
+    </a>
+
+</body>
+</html>

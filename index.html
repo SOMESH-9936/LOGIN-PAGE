@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+
+    <style>
+        body{
+            background-color: rgb(9, 12, 11);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* FALLING HEARTS ANIMATION */
+        .heart{
+            position: fixed;
+            top: -10vh;
+            color: pink;
+            font-size: 25px;
+            animation: fall 5s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes fall{
+            0%   { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Bouncing WELCOME text */
+        h1 span{
+            position: relative;
+            font-family: sans-serif;
+            color: ghostwhite;
+            font-size: 5rem;
+            top: 15px;
+            animation:bounce 0.5s ease infinite alternate;
+        }
+        h1 span:nth-child(1){animation-delay: 0.0s;}
+        h1 span:nth-child(2){animation-delay: 0.1s;}
+        h1 span:nth-child(3){animation-delay: 0.2s;}
+        h1 span:nth-child(4){animation-delay: 0.3s;}
+        h1 span:nth-child(5){animation-delay: 0.4s;}
+        h1 span:nth-child(6){animation-delay: 0.5s;}
+        h1 span:nth-child(7){animation-delay: 0.6s;}
+        @keyframes bounce{
+            100%{
+                top: -100px;
+            }
+        }
+        form{
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            width: 300px;
+            text-align: center;
+            z-index: 10;
+        }
+        input{
+            width: 90%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        button{
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        a{
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body><br><br><br>
+    <!-- Falling Hearts Generator -->
+    <script>
+        function createHeart(){
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = (20 + Math.random() * 20) + "px";
+            heart.style.animationDuration = (4 + Math.random()*3) + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 7000);
+        }
+        setInterval(createHeart, 300);
+    </script>
+    <h1>
+        <span>W</span>
+        <span>E</span>
+        <span>L</span>
+        <span>C</span>
+        <span>O</span>
+        <span>M</span>
+        <span>E</span>
+        <span>💕</span>
+    </h1>
+    <form action="motivation.html">
+        <h1>Create New Account ❤️</h1>
+        <label for="fullname">Full Name 😍</label><br>
+        <input type="text" id="fullname" required><br><br>
+        <label for="email">Email 💌</label><br>
+        <input type="email" id="email" required><br><br>
+        <label for="phone">Phone Number 📱</label><br>
+        <input type="tel" id="phone" required><br><br>
+        <label for="username">Username 👤</label><br>
+        <input type="text" id="username" required><br><br>
+        <label for="password">Password 🔑</label><br>
+        <input type="password" id="password" required><br><br>
+        <label for="confirm">Confirm Password 🔑</label><br>
+        <input type="password" id="confirm" required><br><br>
+        <button type="submit">Create Account 🧾</button>
+        <p>
+            Already have an account?  
+            <a href="index.html">Login Here</a>
+        </p>
+        <button onclick="location.href='motivation.html'" type="button">Login</button>
+        <button onclick="location.href='next.html'" type="button">Next</button>
+    </form>
+</body>
+</html>
